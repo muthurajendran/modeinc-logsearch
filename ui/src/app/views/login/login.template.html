@@ -1,0 +1,28 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+<alert></alert>
+    <div>
+        <div>
+
+            <h1 class="logo-name"><a href="/"><img src="/assets/img/logos/logo.png" width="150" height="150" alt="logo" class="logo"></a></h1>
+
+        </div>
+        <p>Login</p>
+        <form class="m-t" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="model.email" #email="ngModel" required>
+                <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }" >
+                <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required >
+                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary block full-width m-b">Login</button>
+                <app-loading *ngIf="loading" ></app-loading>
+             </div>
+            <a href="#"><small>Forgot password?</small></a>
+            <p class="text-muted text-center"><small>Do not have an account?</small></p>
+            <a class="btn btn-sm btn-white btn-block" [routerLink]="['/register']" >Register</a>
+        </form>
+    </div>
+</div>

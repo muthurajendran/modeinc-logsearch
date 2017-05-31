@@ -1,0 +1,11 @@
+<div *ngIf="message" >
+<div  *ngIf="message.type === 'success'" class="alert alert-success alert-dismissable">
+  <a href="#" class="close" (click)="onClose($event)" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Success!</strong> {{message.text}}
+</div>
+
+<div  *ngIf="message.type === 'error'" class="alert alert-danger alert-dismissable">
+  <a href="#" class="close" (click)="onClose($event)" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Error!</strong> {{message.text}}
+</div>
+</div>

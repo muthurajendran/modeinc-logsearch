@@ -1,0 +1,83 @@
+<alert></alert>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <h3>Search Logs</h3>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <form role="form" class="form-inline" (ngSubmit)="f.form.valid && searchSubmit()" #f="ngForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Date ex.2017-01-05" value="2017-01-05"  class="form-control" [(ngModel)]="model.search_date" #search_date="ngModel" name="search_date">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Time Ex.00:05:34" value="00:05:34" class="form-control" [(ngModel)]="model.search_time" #search_time="ngModel" name="search_time">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Limit"  class="form-control" [(ngModel)]="model.limit" #limit="ngModel" name="limit">
+                            </div>
+                            <button class="btn btn-primary" type="submit" >Search</button>
+                            <p *ngIf="loading">Loading....</p>
+                        </form>
+                    </div>
+                    <div class="row" *ngIf="results.length > 0">
+                        <p> Showing {{results.length}} search results</p>
+                        <div *ngFor="let res of results">
+                            <div class="search-result">
+                                <h3>{{res['orig_host'] + ' ' + res['ts']}}</h3>
+                                <a href="#" class="search-link">{{res['orig_pid']}}</a>
+                                <p>{{res['m']}}
+                                </p>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </div>
+                        <a class="btn btn-primary btn-rounded btn-block" (click)="more()"><i class="fa fa-plus"></i> More </a>
+                        <p *ngIf="loading">Loading....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" >
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Reference </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="get" class="form-inline" (ngSubmit)="f.form.valid && createReference()" #f="ngForm">
+                    <div class="form-group">
+                        <label  class="sr-only">Phone</label>
+                        <input type="text" placeholder="Enter Phone" class="form-control" [(ngModel)]="referenceAdd.phone" #phone="ngModel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label  class="sr-only">Name</label>
+                        <input type="text" placeholder="Enter name" class="form-control" [(ngModel)]="referenceAdd.name" #phone="ngModel" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label  class="sr-only">Where did you work together?</label>
+                        <input type="text" placeholder="Enter work place" class="form-control" [(ngModel)]="referenceAdd.work" #phone="ngModel" name="work">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="createReference()" data-dismiss="modal">Add Reference</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
